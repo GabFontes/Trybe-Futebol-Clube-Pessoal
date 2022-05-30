@@ -1,0 +1,4 @@
+bcryptjs
+cors
+@types/cors
+dotenv
