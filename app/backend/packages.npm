@@ -2,3 +2,4 @@ bcryptjs
 cors
 @types/cors
 dotenv
+joi

@@ -1,14 +1,14 @@
 import { INTEGER, STRING, Model } from 'sequelize';
 import db from '.';
 
-class users extends Model {
+class Users extends Model {
   id: number;
   username: string;
   role: string;
   email: string;
   password: string;
 }
-users.init({
+Users.init({
   id: {
     type: INTEGER,
     allowNull: false,
@@ -37,4 +37,4 @@ users.init({
   timestamps: false,
   underscored: true,
 });
-export default users;
+export default Users;

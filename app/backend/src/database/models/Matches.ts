@@ -1,7 +1,7 @@
 import { INTEGER, BOOLEAN, Model } from 'sequelize';
 import db from '.';
 
-class matches extends Model {
+class Matches extends Model {
   id: number;
   homeTeam: number;
   homeTeamGoals: number;
@@ -9,7 +9,7 @@ class matches extends Model {
   awayTeamGoals: number;
   inProgress: boolean;
 }
-matches.init({
+Matches.init({
   id: {
     type: INTEGER,
     allowNull: false,
@@ -40,4 +40,4 @@ matches.init({
   timestamps: false,
   underscored: true,
 });
-export default matches;
+export default Matches;
