@@ -2,10 +2,10 @@ import { NextFunction, Request, Response } from 'express';
 import LoginUseCase from './LoginUseCase';
 
 class LoginController {
-  private loginUseCase: LoginUseCase;
+  private loginUseCase: typeof LoginUseCase;
 
   constructor() {
-    this.loginUseCase = new LoginUseCase();
+    this.loginUseCase = LoginUseCase;
   }
 
   async login(req: Request, res: Response, next: NextFunction): Promise<Response | void> {

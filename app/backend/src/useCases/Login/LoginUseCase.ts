@@ -3,7 +3,7 @@ import { ILogin, LoginParams, User } from '../../interfaces/ILogin';
 import { jwtSign } from '../../helpers/jwtToken';
 import PassValid from '../../helpers/EncryptedPassValidation';
 
-export default class LoginUseCase {
+class LoginUseCase {
   private model: typeof Users;
 
   constructor() {
@@ -27,3 +27,5 @@ export default class LoginUseCase {
     return { user: { id, username, role, email }, token };
   }
 }
+
+export default new LoginUseCase();
