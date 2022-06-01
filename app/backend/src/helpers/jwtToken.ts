@@ -1,5 +1,6 @@
 import * as jwt from 'jsonwebtoken';
 import * as fs from 'fs';
+import IUserPayload from '../interfaces/IUserPayload';
 
 const SECRET = fs.readFileSync('jwt.evaluation.key', 'utf-8');
 
@@ -8,6 +9,6 @@ const jwtConfig: jwt.SignOptions = {
   expiresIn: '7d',
 };
 
-export const jwtSign = (payload: object): string => jwt.sign(payload, SECRET, jwtConfig);
+export const jwtSign = (payload: IUserPayload): string => jwt.sign(payload, SECRET, jwtConfig);
 
-export const jwtVerify = (token: string) => jwt.verify(token, SECRET) as object;
+export const jwtVerify = (token: string) => jwt.verify(token, SECRET) as IUserPayload;

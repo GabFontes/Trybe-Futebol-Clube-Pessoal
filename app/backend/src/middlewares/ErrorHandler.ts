@@ -1,7 +1,12 @@
 import { NextFunction, Request, Response } from 'express';
-import IError from '../interfaces/IError';
+import { DefinedHttpError } from 'restify-errors';
 
-export default (error: IError, _req: Request, res: Response, _next: NextFunction) => {
-  console.log('erro', error);
+export default (error: DefinedHttpError, _req: Request, res: Response, _next: NextFunction) => {
+  console.log(error);
+
+  if (error.statusCode) {
+    return res.status(error.statusCode).json({ message: error.message });
+  }
+
   return res.status(500).send({ message: error.message });
 };

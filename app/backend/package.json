@@ -30,6 +30,7 @@
     "@types/jsonwebtoken": "8.5.6",
     "@types/mocha": "9.1.0",
     "@types/node": "16.11.7",
+    "@types/restify-errors": "^4.3.4",
     "@types/sequelize": "4.28.10",
     "@types/sinon": "10.0.11",
     "@types/validator": "13.6.6",
@@ -62,6 +63,7 @@
     "joi": "^17.6.0",
     "jsonwebtoken": "8.5.1",
     "mysql2": "2.3.3",
+    "restify-errors": "^4.1.0",
     "sequelize": "6.9.0"
   }
 }

@@ -17,6 +17,16 @@ class LoginController {
       next(error);
     }
   }
+
+  async loginValidate(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { authorization } = req.headers;
+      const role = await this.loginUseCase.loginValidate(authorization as string);
+      return res.status(200).json(role);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default new LoginController();

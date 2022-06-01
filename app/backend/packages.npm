@@ -1,5 +1,8 @@
 bcryptjs
+@types/bcryptjs
 cors
 @types/cors
 dotenv
 joi
+restify-errors@4.1.0
+@types/restify-errors
