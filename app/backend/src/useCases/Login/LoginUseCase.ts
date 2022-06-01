@@ -12,7 +12,6 @@ class LoginUseCase {
 
   async login({ email, password }: LoginParams): Promise<ILogin> {
     const user: User | null = await this.model.findOne({ where: { email } });
-    console.log(user);
 
     if (!user) {
       throw new Error('Incorrect Email or Password');
