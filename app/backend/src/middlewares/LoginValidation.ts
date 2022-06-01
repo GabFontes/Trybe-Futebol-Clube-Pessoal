@@ -1,21 +1,18 @@
-import * as Joi from 'joi';
-import { Request, Response, NextFunction } from 'express';
+import { NextFunction, Request, Response } from 'express';
+import * as errors from 'restify-errors';
 
-const loginValidation = Joi.object({
-  // https://stackoverflow.com/questions/57972358/joi-email-validation
-  email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required()
-    .messages({
-      'email.required': '"email" is required',
-    }),
-  password: Joi.string().min(6).required()
-    .messages({
-      'password.required': '"password" is required ',
-      'string.min': '"password" length must be 6 characters long',
-    }),
-});
+const LoginValidation = (req: Request, _res: Response, next: NextFunction) => {
+  const { email, password } = req.body;
 
-export default (req: Request, res: Response, next: NextFunction) => {
-  const { error } = loginValidation.validate(req.body);
-  if (error) return res.status(400).json({ message: error.message });
+  if (!password || typeof password !== 'string') {
+    throw new errors.BadRequestError('All fields must be filled');
+  }
+
+  if (!email || typeof email !== 'string') {
+    throw new errors.BadRequestError('All fields must be filled');
+  }
+
   next();
 };
+
+export default LoginValidation;

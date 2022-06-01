@@ -15,11 +15,11 @@ class LoginUseCase {
     const user: User | null = await this.model.findOne({ where: { email } });
 
     if (!user) {
-      throw new errors.UnauthorizedError('Incorrect Email or Password');
+      throw new errors.UnauthorizedError('Incorrect email or password');
     }
 
     if (user.password && !PassValid(password, user.password)) {
-      throw new errors.UnauthorizedError('Incorrect Email or Password');
+      throw new errors.UnauthorizedError('Incorrect email or password');
     }
 
     const { id, username, role } = user;
