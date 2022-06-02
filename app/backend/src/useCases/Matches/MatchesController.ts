@@ -51,6 +51,17 @@ class MatchesController {
       next(error);
     }
   }
+
+  async update(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { homeTeamGoals, awayTeamGoals } = req.body;
+      const { id } = req.params;
+      const updatedMatch = await this.matchesUseCase.update({ homeTeamGoals, awayTeamGoals, id });
+      return res.status(200).json(updatedMatch);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default new MatchesController();
