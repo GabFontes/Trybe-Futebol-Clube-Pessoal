@@ -18,7 +18,7 @@ class LoginController {
     }
   }
 
-  async loginValidate(req: Request, res: Response, next: NextFunction) {
+  async loginValidate(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
     try {
       const { authorization } = req.headers;
       const role = await this.loginUseCase.loginValidate(authorization as string);
