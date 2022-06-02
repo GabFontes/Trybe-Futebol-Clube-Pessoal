@@ -1,5 +1,5 @@
 import * as errors from 'restify-errors';
-import IMatch from '../../interfaces/IMatches';
+import IMatch, { IUpdateMatch } from '../../interfaces/IMatches';
 import Teams from '../../database/models/Teams';
 import Matches from '../../database/models/Matches';
 
@@ -55,29 +55,28 @@ class MatchesUseCase {
     return team;
   }
 
-  async create(
-    { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals, inProgress }: IMatch,
-  ) {
-    if (homeTeam === awayTeam) {
+  async create(match: IMatch) {
+    if (match.homeTeam === match.awayTeam) {
       throw new errors
         .UnauthorizedError('It is not possible to create a match with two equal teams');
     }
 
-    const hTeam = await this.getById(homeTeam);
-    const aTeam = await this.getById(awayTeam);
+    const exists = [match.homeTeam, match.awayTeam].map((team) => this.getById(team));
 
-    if (!hTeam) throw new errors.NotFoundError('There is no team with such id!');
-    if (!aTeam) throw new errors.NotFoundError('There is no team with such id!');
+    const response = await Promise.all(exists);
 
-    const newMatch = await this.model.create({
-      homeTeam,
-      awayTeam,
-      homeTeamGoals,
-      awayTeamGoals,
-      inProgress,
-    });
+    if (response.includes(null)) throw new errors.NotFoundError('There is no team with such id!');
 
-    return newMatch;
+    return this.model.create(match);
+  }
+
+  async update({ homeTeamGoals, awayTeamGoals, id }: IUpdateMatch) {
+    const updatedMatch = await this.model.update(
+      { homeTeamGoals, awayTeamGoals },
+      { where: { id } },
+    );
+
+    return updatedMatch;
   }
 
   async finishMatch(id: string) {
