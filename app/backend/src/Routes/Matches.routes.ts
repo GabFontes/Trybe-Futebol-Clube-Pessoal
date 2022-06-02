@@ -12,6 +12,10 @@ MatchesRouter.post('/', TokenValidation, (req, res, next) => {
   MatchesController.create(req, res, next);
 });
 
+MatchesRouter.patch('/:id', (req, res, next) => {
+  MatchesController.finishMatch(req, res, next);
+});
+
 MatchesRouter.patch('/:id/finish', (req, res, next) => {
   MatchesController.finishMatch(req, res, next);
 });
