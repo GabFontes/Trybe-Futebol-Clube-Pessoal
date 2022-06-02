@@ -16,10 +16,10 @@ class TeamsUseCase {
   }
 
   async getById(id: string) {
-    const teams = await this.model.findByPk(id);
-    if (!teams) throw new errors.NotFoundError('Teams Not Found');
+    const team = await this.model.findByPk(id);
+    if (!team) throw new errors.NotFoundError('Teams Not Found');
 
-    return teams;
+    return team;
   }
 }
 
