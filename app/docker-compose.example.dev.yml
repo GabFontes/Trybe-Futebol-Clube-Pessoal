@@ -10,14 +10,17 @@ services:
     # Os `healthcheck` devem garantir que a aplicação
     # está operacional, antes de liberar o container
     healthcheck:
-      test: [ "CMD", "lsof", "-t", "-i:3000" ]
+      test: ["CMD", "lsof", "-t", "-i:3000"]  # Caso utilize outra porta interna para o front, altere ela aqui também
       timeout: 10s
       retries: 5
   backend:
     build: ./backend
+    # ...
     platform: linux/x86_64
     restart: 'always'
-    # ...
+    command: npm run dev
+    volumes:
+      - './backend/src:/app/src'
     depends_on:
       db:
         condition: service_healthy
@@ -31,20 +34,20 @@ services:
       - DB_NAME=TRYBE_FUTEBOL_CLUBE
       - DB_PORT=3306
     healthcheck:
-      test: [ "CMD", "lsof", "-t", "-i:3001" ]
+      test: ["CMD", "lsof", "-t", "-i:3001"] # Caso utilize outra porta interna para o back, altere ela aqui também
       timeout: 10s
       retries: 5
   db:
     image: mysql:8.0.21
-    platform: linux/x86_64
     container_name: db
+    platform: linux/x86_64
     ports:
       - 3002:3306
     environment:
       - MYSQL_ROOT_PASSWORD=123456
     restart: 'always'
     healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"] # Deve aguardar o banco ficar operacional
       timeout: 10s
       retries: 5
     cap_add:
