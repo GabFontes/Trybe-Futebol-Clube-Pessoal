@@ -17,7 +17,6 @@ class TeamsUseCase {
 
   async getById(id: string | number): Promise<Teams | null> {
     const team = await this.model.findByPk(id);
-    if (!team) throw new errors.NotFoundError('Team Not Found');
     return team;
   }
 }
