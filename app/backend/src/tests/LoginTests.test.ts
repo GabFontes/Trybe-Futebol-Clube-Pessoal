@@ -3,7 +3,14 @@ import * as chai from 'chai';
 // @ts-ignore
 import Users from '../database/models/Users';
 import chaiHttp = require('chai-http');
-import { users, loginBody, loginBodyWithoutEmail, loginBodyWithoutPassword } from './Mocks/LoginMocks/login';
+import {
+  users,
+  loginBody,
+  loginBodyWithoutEmail,
+  loginBodyWithoutPassword,
+  // loginBodyWrongEmail,
+  // loginBodyWrongPassword
+} from './Mocks/LoginMocks/login';
 
 import { app } from '../app';
 
@@ -80,12 +87,15 @@ describe('Testando a rota Login', () => {
             .send(loginBodyWithoutPassword)
         });
 
+        after(() => {
+          (Users.findOne as sinon.SinonStub).restore();
+        });
+
         expect(chaiHttpResponse).to.have.status(400)
         expect(chaiHttpResponse.body).to.be.deep.equal({
           message: "All fields must be filled"
         });
       });
-
     });
 
   });
