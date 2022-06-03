@@ -19,16 +19,6 @@ const loginBody = {
   password: "secret_admin"
 }
 
-const loginBodyWrongPassword = {
-  email: "admin@admin.com",
-  password: "secret"
-}
-
-const loginBodyWrongEmail = {
-  email: "admin",
-  password: "secret_admin"
-}
-
 const loginBodyWithoutEmail = {
   password: "secret_admin"
 }
@@ -42,6 +32,4 @@ export {
   loginBody,
   loginBodyWithoutEmail,
   loginBodyWithoutPassword,
-  loginBodyWrongPassword,
-  loginBodyWrongEmail
 }

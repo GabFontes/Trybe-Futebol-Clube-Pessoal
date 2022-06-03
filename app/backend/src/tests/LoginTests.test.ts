@@ -8,8 +8,6 @@ import {
   loginBody,
   loginBodyWithoutEmail,
   loginBodyWithoutPassword,
-  // loginBodyWrongEmail,
-  // loginBodyWrongPassword
 } from './Mocks/LoginMocks/login';
 
 import { app } from '../app';
@@ -87,17 +85,39 @@ describe('Testando a rota Login', () => {
             .send(loginBodyWithoutPassword)
         });
 
-        after(() => {
-          (Users.findOne as sinon.SinonStub).restore();
-        });
-
         expect(chaiHttpResponse).to.have.status(400)
         expect(chaiHttpResponse.body).to.be.deep.equal({
           message: "All fields must be filled"
         });
       });
+
     });
 
+    describe('Quando a requisição é feita passando valores incorretos', async () => {
+      before(async () => {
+        sinon
+          .stub(Users, "findOne")
+          .resolves(null);
+        chaiHttpResponse = await chai
+          .request(app)
+          .post('/login')
+          .send(loginBody)
+      })
+
+      after(() => {
+        (Users.findOne as sinon.SinonStub).restore();
+      })
+
+      it('Verifica retorno do status 401', () => {
+        expect(chaiHttpResponse).to.have.status(401);
+      });
+
+      it('Verifica mensagem de erro', () => {
+        expect(chaiHttpResponse.body).to.deep.equal({ message: 'Incorrect email or password' });
+      });
+    });
   });
 
+
 });
+
