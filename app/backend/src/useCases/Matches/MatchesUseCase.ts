@@ -1,13 +1,16 @@
 import * as errors from 'restify-errors';
 import IMatch, { IUpdateMatch } from '../../interfaces/IMatches';
-import Teams from '../../database/models/Teams';
+import TeamsService from '../Teams/TeamsUseCase';
 import Matches from '../../database/models/Matches';
+import Teams from '../../database/models/Teams';
 
 class MatchesUseCase {
   private model: typeof Matches;
+  private teamsService: typeof TeamsService;
 
   constructor() {
     this.model = Matches;
+    this.teamsService = TeamsService;
   }
 
   async getAll() {
@@ -61,7 +64,7 @@ class MatchesUseCase {
         .UnauthorizedError('It is not possible to create a match with two equal teams');
     }
 
-    const exists = [match.homeTeam, match.awayTeam].map((team) => this.getById(team));
+    const exists = [match.homeTeam, match.awayTeam].map((team) => this.teamsService.getById(team));
 
     const response = await Promise.all(exists);
 
