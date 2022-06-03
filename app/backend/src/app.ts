@@ -1,4 +1,5 @@
 import * as express from 'express';
+import * as cors from 'cors';
 import LoginRouter from './Routes/Login.routes';
 import TeamsRouter from './Routes/Teams.routes';
 import MatchesRouter from './Routes/Matches.routes';
@@ -11,9 +12,14 @@ class App {
   constructor() {
     this.app = express();
     this.config();
+    this.cors();
     this.RoutesRegister();
     this.ErrorHandler();
     // ...
+  }
+
+  private cors() {
+    this.app.use(cors());
   }
 
   private config(): void {
