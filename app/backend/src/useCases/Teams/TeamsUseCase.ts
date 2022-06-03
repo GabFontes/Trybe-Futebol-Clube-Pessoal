@@ -8,17 +8,16 @@ class TeamsUseCase {
     this.model = Teams;
   }
 
-  async getAll() {
+  async getAll(): Promise<Teams[]> {
     const teams = await this.model.findAll();
     if (!teams) throw new errors.NotFoundError('Teams Not Found');
 
     return teams;
   }
 
-  async getById(id: string) {
+  async getById(id: string | number): Promise<Teams | null> {
     const team = await this.model.findByPk(id);
-    if (!team) throw new errors.NotFoundError('Teams Not Found');
-
+    if (!team) throw new errors.NotFoundError('Team Not Found');
     return team;
   }
 }
