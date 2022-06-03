@@ -21,6 +21,7 @@ class TeamsController {
     try {
       const { id } = req.params;
       const teams = await this.teamsUseCase.getById(id);
+      if (!teams) throw new Error('Team Not Found');
       return res.status(200).json(teams);
     } catch (error) {
       next(error);
