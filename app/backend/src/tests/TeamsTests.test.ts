@@ -33,7 +33,6 @@ describe('Testando a rota Teams', () => {
       });
 
       it('Retorna todos os times', () => {
-        console.log(chaiHttpResponse);
         expect(chaiHttpResponse.body).to.deep.equal(allTeams);
 
         expect(chaiHttpResponse).to.have.status(200);
@@ -82,7 +81,7 @@ describe('Testando a rota Teams', () => {
 
       it('Retorna uma mensagem de erro', () => {
         expect(chaiHttpResponse.body).to.deep.equal({
-          message: "Teams Not Found"
+          message: "Team Not Found"
         });
         expect(chaiHttpResponse).to.have.status(404);
       });
