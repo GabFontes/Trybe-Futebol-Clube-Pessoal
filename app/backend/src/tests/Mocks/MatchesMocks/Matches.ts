@@ -338,8 +338,17 @@ const matches = [
 ]
 
 const matchBodyPost = {
-  homeTeam: 10,
-  awayTeam: 30,
+  homeTeam: 1,
+  awayTeam: 2,
+  homeTeamGoals: 2,
+  awayTeamGoals: 2,
+  inProgress: true
+}
+
+const newMatchBody = {
+  id: 49,
+  homeTeam: 1,
+  awayTeam: 2,
   homeTeamGoals: 2,
   awayTeamGoals: 2,
   inProgress: true
@@ -350,4 +359,12 @@ const updateGoalsBodyPatch = {
   awayTeamGoals: 1
 }
 
-export { matches, matchBodyPost, updateGoalsBodyPatch };
+
+const searchedTeams = [
+  { id: 1, teamName: 'Avaí/Kindermann' },
+  { id: 2, teamName: 'Bahia' }
+]
+
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJBZG1pbiIsInJvbGUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwiaWF0IjoxNjU0MTEzNjkzLCJleHAiOjE2NTQ3MTg0OTN9.sbq1DrVyAOqvyhI8R9jdzAMTrz2gA2TZlUGq0cKmoIg'
+
+export { matches, matchBodyPost, updateGoalsBodyPatch, searchedTeams, newMatchBody, token };
