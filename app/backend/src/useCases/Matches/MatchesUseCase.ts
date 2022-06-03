@@ -71,12 +71,12 @@ class MatchesUseCase {
   }
 
   async update({ homeTeamGoals, awayTeamGoals, id }: IUpdateMatch) {
-    const updatedMatch = await this.model.update(
+    await this.model.update(
       { homeTeamGoals, awayTeamGoals },
       { where: { id } },
     );
 
-    return updatedMatch;
+    return { message: `The match ${id} has been updated` };
   }
 
   async finishMatch(id: string) {
