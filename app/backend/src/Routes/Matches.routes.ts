@@ -13,7 +13,7 @@ MatchesRouter.post('/', TokenValidation, (req, res, next) => {
 });
 
 MatchesRouter.patch('/:id', (req, res, next) => {
-  MatchesController.finishMatch(req, res, next);
+  MatchesController.update(req, res, next);
 });
 
 MatchesRouter.patch('/:id/finish', (req, res, next) => {
