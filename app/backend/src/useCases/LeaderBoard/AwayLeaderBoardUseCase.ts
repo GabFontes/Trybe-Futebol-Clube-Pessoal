@@ -83,8 +83,8 @@ class AwayLeaderBoardUseCase {
 
     const resolvedLeaderBoard = await Promise.all(completedLeaderBoard);
 
-    const keysOrder = ['totalVictories', 'goalsBalance', 'goalsFavor', 'goalsOwn'];
-    const order = ['desc', 'desc', 'desc', 'desc'];
+    const keysOrder = ['totalPoints', 'totalVictories', 'goalsBalance', 'goalsFavor', 'goalsOwn'];
+    const order = ['desc', 'desc', 'desc', 'desc', 'desc'];
 
     return sortArray(resolvedLeaderBoard, { by: keysOrder, order });
   }
