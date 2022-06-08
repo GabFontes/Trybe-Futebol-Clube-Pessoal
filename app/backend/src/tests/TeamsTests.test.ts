@@ -83,7 +83,7 @@ describe('Testando a rota Teams', () => {
         expect(chaiHttpResponse.body).to.deep.equal({
           message: "Team Not Found"
         });
-        expect(chaiHttpResponse).to.have.status(404);
+        expect(chaiHttpResponse).to.have.status(500);
       });
     });
   });
