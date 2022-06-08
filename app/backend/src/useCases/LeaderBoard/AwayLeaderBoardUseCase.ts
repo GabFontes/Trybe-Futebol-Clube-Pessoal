@@ -70,7 +70,7 @@ class AwayLeaderBoardUseCase {
 
     const completedLeaderBoard = allTeams.map(async (team) => {
       const finishedMatches = await this.matches.findAll(
-        { where: { homeTeam: team.id, inProgress: false } },
+        { where: { awayTeam: team.id, inProgress: false } },
       );
 
       const boardWithoutName = AwayLeaderBoardUseCase.boardWithoutName(finishedMatches);
@@ -83,8 +83,8 @@ class AwayLeaderBoardUseCase {
 
     const resolvedLeaderBoard = await Promise.all(completedLeaderBoard);
 
-    const keysOrder = ['totalPoints', 'totalVictories', 'goalsBalance', 'goalsFavor', 'goalsOwn'];
-    const order = ['desc', 'desc', 'desc', 'desc', 'desc'];
+    const keysOrder = ['totalVictories', 'goalsBalance', 'goalsFavor', 'goalsOwn'];
+    const order = ['desc', 'desc', 'desc', 'desc'];
 
     return sortArray(resolvedLeaderBoard, { by: keysOrder, order });
   }
