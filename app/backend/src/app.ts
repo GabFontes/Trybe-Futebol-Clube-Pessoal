@@ -3,6 +3,7 @@ import * as cors from 'cors';
 import LoginRouter from './Routes/Login.routes';
 import TeamsRouter from './Routes/Teams.routes';
 import MatchesRouter from './Routes/Matches.routes';
+import LeaderBoardRouter from './Routes/LeaderBoard.routes';
 import ErrorHandler from './middlewares/ErrorHandler';
 
 class App {
@@ -38,6 +39,7 @@ class App {
     this.app.use('/login', LoginRouter);
     this.app.use('/teams', TeamsRouter);
     this.app.use('/matches', MatchesRouter);
+    this.app.use('/leaderboard', LeaderBoardRouter);
   }
 
   private ErrorHandler(): void {
