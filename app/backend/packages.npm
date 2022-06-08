@@ -6,3 +6,5 @@ dotenv
 joi
 restify-errors@4.1.0
 @types/restify-errors
+sort-array
+@types/sort-array
